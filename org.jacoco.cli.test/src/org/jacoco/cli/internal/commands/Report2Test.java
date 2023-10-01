@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.jacoco.cli.internal.Command;
+import org.jacoco.core.JaCoCo;
 import org.jacoco.core.analysis.Analyzer;
 import org.jacoco.core.analysis.CoverageBuilder;
 import org.jacoco.core.analysis.IBundleCoverage;
@@ -163,7 +164,7 @@ public class Report2Test extends Command {
             execfiles = Arrays.asList(new File("D:\\Projects\\Java\\springboot-hello\\exec_files\\jacoco.exec"));
             classfiles = Arrays.asList(new File("D:\\Projects\\Java\\springboot-hello\\target\\classes"));
             sourcefiles = Arrays.asList(new File("D:\\Projects\\Java\\springboot-hello\\src\\main\\java"));
-            html = new File("");
+            html = new File("D:\\Projects\\Java\\jacoco-0.8.8\\output\\report");
             execute(new PrintWriter(out),new PrintWriter(err));
         } catch (IOException e) {
             e.printStackTrace();
