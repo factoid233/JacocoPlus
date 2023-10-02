@@ -86,17 +86,25 @@ public class BarColumn implements IColumnRenderer {
 			throws IOException {
 		if (max > 0) {
 			final ICounter counter = item.getNode().getCounter(entity);
-			final int missed = counter.getMissedCount();
-			bar(td, missed, Resources.REDBAR, resources, base);
+			//增加total数值
+			final int total = counter.getTotalCount();
 			final int covered = counter.getCoveredCount();
-			bar(td, covered, Resources.GREENBAR, resources, base);
+			bar(td, covered, Resources.GREENBAR, resources, base,total);
+			final int missed = counter.getMissedCount();
+			bar(td, missed, Resources.REDBAR, resources, base,total);
+
 		}
 	}
 
 	private void bar(final HTMLElement td, final int count, final String image,
-			final Resources resources, final ReportOutputFolder base)
+			final Resources resources, final ReportOutputFolder base,final int total)
 			throws IOException {
-		final int width = count * WIDTH / max;
+		// 确定柱子最大宽度为固定值，使用百分比填充bar最大宽度
+		int width = 0;
+		if (total != 0){
+			width = count * WIDTH / total;
+		}
+
 		if (width > 0) {
 			td.img(resources.getLink(base, image), width, 10,
 					integerFormat.format(count));

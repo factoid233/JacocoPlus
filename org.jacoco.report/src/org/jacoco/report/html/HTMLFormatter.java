@@ -133,18 +133,28 @@ public class HTMLFormatter implements IHTMLReportContext {
 	private Table createTable() {
 		final Table t = new Table();
 		t.add("Element", null, new LabelColumn(), false);
-		t.add("Missed Instructions", Styles.BAR,
-				new BarColumn(CounterEntity.INSTRUCTION, locale), true);
-		t.add("Cov.", Styles.CTR2,
-				new PercentageColumn(CounterEntity.INSTRUCTION, locale), false);
-		t.add("Missed Branches", Styles.BAR,
+		// 分支覆盖率
+		t.add("Branches", Styles.BAR,
 				new BarColumn(CounterEntity.BRANCH, locale), false);
 		t.add("Cov.", Styles.CTR2,
 				new PercentageColumn(CounterEntity.BRANCH, locale), false);
-		addMissedTotalColumns(t, "Cxty", CounterEntity.COMPLEXITY);
-		addMissedTotalColumns(t, "Lines", CounterEntity.LINE);
-		addMissedTotalColumns(t, "Methods", CounterEntity.METHOD);
-		addMissedTotalColumns(t, "Classes", CounterEntity.CLASS);
+		// 行覆盖率
+		t.add("Lines", Styles.BAR,
+				new BarColumn(CounterEntity.LINE, locale), false);
+		t.add("Cov.", Styles.CTR2,
+				new PercentageColumn(CounterEntity.LINE, locale), false);
+
+		//方法覆盖率
+		t.add("Methods", Styles.BAR,
+				new BarColumn(CounterEntity.METHOD, locale), false);
+		t.add("Cov.", Styles.CTR2,
+				new PercentageColumn(CounterEntity.METHOD, locale), false);
+
+		// 类覆盖率
+		t.add("Classes", Styles.BAR,
+				new BarColumn(CounterEntity.CLASS, locale), false);
+		t.add("Cov.", Styles.CTR2,
+				new PercentageColumn(CounterEntity.CLASS, locale), false);
 		return t;
 	}
 
